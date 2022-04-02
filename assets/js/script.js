@@ -115,7 +115,7 @@ const getTransferencias = async () => {
     data.forEach((t) => {
         $(".transferencias").append(`
        <tr>
-         <td> ${formatDate(t[4])} </td>
+         <td> ${formatDate(t[0])} </td>
          <td> ${t[1]} </td>
          <td> ${t[2]} </td>
          <td> ${t[3]} </td>

@@ -10,8 +10,8 @@ http.createServer(async (req, res) => {
     //Disponibilizando html
     if (req.url == '/' && req.method == 'GET') {
         fs.readFile(path.join(__dirname, '..', 'index.html'), (err, html) => {
-            if (err) {
-                res.statusCode = 500;
+            if (err) { //(Requerimiento 4)
+                res.statusCode = 500; //(Requerimiento 5)
                 res.end();
             } else {
                 res.setHeader('Content-Type', 'text/html');
@@ -22,8 +22,8 @@ http.createServer(async (req, res) => {
     //Disponibilizando css
     if (req.url == '/style') {
         fs.readFile(path.join(__dirname, '..', '/assets/css/style.css'), (err, css) => {
-            if (err) {
-                res.statusCode = 500;
+            if (err) { //(Requerimiento 4)
+                res.statusCode = 500; //(Requerimiento 5)
                 res.end();
             } else {
                 res.setHeader('Content-Type', 'text/css');
@@ -31,11 +31,11 @@ http.createServer(async (req, res) => {
             }
         });
     }
-    //Disponibilizando javascript
+    //Disponibilizando javascript 
     if (req.url == '/script') {
         fs.readFile(path.join(__dirname, '..', '/assets/js/script.js'), (err, js) => {
-            if (err) {
-                res.statusCode = 500;
+            if (err) { //(Requerimiento 4)
+                res.statusCode = 500; //(Requerimiento 5)
                 res.end();
             } else {
                 res.setHeader('Content-Type', 'text/javascript');
@@ -46,8 +46,8 @@ http.createServer(async (req, res) => {
     //Disponibilizando favicon
     if (req.url == '/favicon') {
         fs.readFile(path.join(__dirname, '..', '/assets/img/favicon_banco.png'), (err, icon) => {
-            if (err) {
-                res.statusCode = 500;
+            if (err) { //(Requerimiento 4)
+                res.statusCode = 500;//(Requerimiento 5)
                 res.end();
             } else {
                 res.setHeader('Content-Type', 'text/javascript');
@@ -58,8 +58,8 @@ http.createServer(async (req, res) => {
     //Disponibilizando logo
     if (req.url == '/logo') {
         fs.readFile(path.join(__dirname, '..', '/assets/img/logo.png'), (err, icon) => {
-            if (err) {
-                res.statusCode = 500;
+            if (err) { //(Requerimiento 4)
+                res.statusCode = 500;//(Requerimiento 5)
                 res.end();
             } else {
                 res.setHeader('Content-Type', 'text/javascript');
@@ -67,7 +67,7 @@ http.createServer(async (req, res) => {
             }
         });
     }
-    //Ruta con metodo POST para registrar nuevo usuario
+    //Ruta con metodo POST para registrar nuevo usuario (Requerimiento 3)
     if (req.url == '/usuario' && req.method == 'POST') {
         let body = '';
         req.on('data', (chunk) => {
@@ -77,22 +77,22 @@ http.createServer(async (req, res) => {
             try {
                 const datos = Object.values(JSON.parse(body));
                 const result = await registrarUsuario(datos);
-                res.statusCode = 201;
+                res.statusCode = 201;//(Requerimiento 5)
                 res.end(JSON.stringify(result));
-            } catch (err) {
-                res.statusCode = 500;
+            } catch (err) { //(Requerimiento 4)
+                res.statusCode = 500;//(Requerimiento 5)
                 res.end('Problema en el servidor => ', err);
             }
         });
     }
-    //Ruta con metodo GET para mostrar usuarios
+    //Ruta con metodo GET para mostrar usuarios (Requerimiento 3)
     if (req.url == '/usuarios' && req.method == 'GET') {
         try {
             const usuarios = await getUsuarios();
-            res.statusCode = 201;
+            res.statusCode = 201;//(Requerimiento 5)
             res.end(JSON.stringify(usuarios.rows));
-        } catch (err) {
-            res.statusCode = 500;
+        } catch (err) { //(Requerimiento 4)
+            res.statusCode = 500;//(Requerimiento 5)
             res.end('Problema en el servidor => ', err);
         }
     }
@@ -106,23 +106,23 @@ http.createServer(async (req, res) => {
             try {
                 const datos = Object.values(JSON.parse(body));
                 const result = await editarUsuario(datos);
-                res.statusCode = 201;
+                res.statusCode = 201;//(Requerimiento 5)
                 res.end(JSON.stringify(result));
-            } catch (err) {
-                res.statusCode = 500;
+            } catch (err) { //(Requerimiento 4)
+                res.statusCode = 500;//(Requerimiento 5)
                 res.end('Problema en el servidor => ', err);
             }
         });
     }
-    //Ruta con metodo DELETE para eliminar del registro al usuario, se realiza UPDATE para cambiar estado de false a true
+    //Ruta con metodo DELETE para eliminar del registro al usuario, se realiza UPDATE para cambiar estado de false a true (Requerimiento 3)
     if (req.url.startsWith('/usuario') && req.method == 'DELETE') {
         try {
             const { id } = url.parse(req.url, true).query;
             const result = await eliminarUsuario(id);
-            res.statusCode = 201;
+            res.statusCode = 201;//(Requerimiento 5)
             res.end(JSON.stringify(result));
-        } catch (err) {
-            res.statusCode = 500;
+        } catch (err) { //(Requerimiento 4)
+            res.statusCode = 500;//(Requerimiento 5)
             res.end('Problema en el servidor => ', err);
         }
     }
@@ -136,10 +136,10 @@ http.createServer(async (req, res) => {
             try {
                 const datos = Object.values(JSON.parse(body));
                 const result = await registrarTransferencia(datos);
-                res.statusCode = 201;
+                res.statusCode = 201;//(Requerimiento 5)
                 res.end(JSON.stringify(result));
-            } catch (err) {
-                res.statusCode = 500;
+            } catch (err) { //(Requerimiento 4)
+                res.statusCode = 500;//(Requerimiento 5)
                 res.end('Problema en el servidor => ', err);
             }
         });
@@ -148,10 +148,10 @@ http.createServer(async (req, res) => {
     if (req.url == '/transferencias' && req.method == 'GET') {
         try {
             const transferencias = await getTransferencias();
-            res.statusCode = 201;
+            res.statusCode = 201;//(Requerimiento 5)
             res.end(JSON.stringify(transferencias.rows));
-        } catch (err) {
-            res.statusCode = 500;
+        } catch (err) { //(Requerimiento 4)
+            res.statusCode = 500;//(Requerimiento 5)
             res.end('Problema en el servidor => ', err);
         }
     }

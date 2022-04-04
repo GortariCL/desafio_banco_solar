@@ -31,9 +31,9 @@
           <hr class="bg-white w-50" />
           <div class="d-flex align-items-center justify-content-center">
             Nombre:
-            <input class="form-control d-inline mx-3" required />
+            <input class="form-control d-inline mx-3" pattern="^[a-zA-Z\s]+" required />
             Balance:
-            <input class="form-control d-inline mx-3" required />
+            <input class="form-control d-inline mx-3" pattern="[0-9]+" required />
             <button type="submit" class="btn btn-danger">Agregar</button>
           </div>
         </div>
@@ -62,7 +62,7 @@
             <div class="mr-3">
               Monto:
 
-              <input type="text" class="form-control mx-2 w-auto d-inline" id="monto" />
+              <input type="text" class="form-control mx-2 w-auto d-inline" id="monto" pattern="[0-9]+" required />
             </div>
 
             <button type="submit" class="btn btn-danger">Relalizar</button>

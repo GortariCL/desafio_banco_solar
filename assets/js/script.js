@@ -86,7 +86,7 @@ const getUsuarios = async () => {
         $(".usuarios").append(`
               <tr>
                 <td>${c.nombre}</td>
-                <td>${c.balance}</td>
+                <td>$${c.balance}</td>
                 <td>
                   <button
                     class="btn btn-warning mr-2"
@@ -122,7 +122,7 @@ const getTransferencias = async () => {
          <td> ${formatDate(t[0])} </td>
          <td> ${t[1]} </td>
          <td> ${t[2]} </td>
-         <td> ${t[3]} </td>
+         <td> $${t[3]} </td>
        </tr>
      `);
     });

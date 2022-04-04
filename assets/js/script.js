@@ -56,6 +56,10 @@ $("form:last").submit(async (e) => {
         alert ('El emisor y receptor deben ser diferentes!');
         return false;
     }
+    if (monto <= 0){
+        alert ('El monto debe ser mayor a 0');
+        return false;
+    }
     try {
         const response = await fetch("http://localhost:3000/transferencia", {
             method: "post",

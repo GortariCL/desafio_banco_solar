@@ -114,18 +114,20 @@ const eliminarUsuario = async (id) => {
 
 const getTransferencias = async () => {
     const { data } = await axios.get("http://localhost:3000/transferencias");
-    $(".transferencias").html("");
+    if (data.length > 0){
+        $(".transferencias").html("");
 
-    data.forEach((t) => {
-        $(".transferencias").append(`
-       <tr>
-         <td> ${formatDate(t[0])} </td>
-         <td> ${t[1]} </td>
-         <td> ${t[2]} </td>
-         <td> $${t[3]} </td>
-       </tr>
-     `);
-    });
+        data.forEach((t) => {
+            $(".transferencias").append(`
+           <tr>
+             <td> ${formatDate(t[0])} </td>
+             <td> ${t[1]} </td>
+             <td> ${t[2]} </td>
+             <td> $${t[3]} </td>
+           </tr>
+         `);
+        });
+    }   
 };
 
 getUsuarios();

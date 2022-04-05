@@ -20,7 +20,10 @@ const registrarUsuario = async (datos) => {
         const result = await pool.query(consulta);
         return result;
     } catch (err) {//(Requerimiento 4)
-        console.log('Error: ', err);
+        console.log(`El error se encuentra en la tabla: ${err.table}.
+        El detalle del error es: ${err.detail}.
+        El código de error es: ${err.code}.
+        Restricción violada: ${err.constraint}`);
     }
 }
 //Funcion para mostrar usuarios en html
@@ -29,7 +32,10 @@ const getUsuarios = async () => {
         const result = await pool.query('SELECT * FROM usuarios WHERE estado = true');
         return result;
     } catch (err) {//(Requerimiento 4)
-        console.log('Error: ', err);
+        console.log(`El error se encuentra en la tabla: ${err.table}.
+        El detalle del error es: ${err.detail}.
+        El código de error es: ${err.code}.
+        Restricción violada: ${err.constraint}`);
     }
 }
 //Funcion para editar usuario
@@ -42,7 +48,10 @@ const editarUsuario = async (datos) => {
         const result = await pool.query(consulta);
         return result;
     } catch (err) {//(Requerimiento 4)
-        console.log('Error: ', err);
+        console.log(`El error se encuentra en la tabla: ${err.table}.
+        El detalle del error es: ${err.detail}.
+        El código de error es: ${err.code}.
+        Restricción violada: ${err.constraint}`);
     }
 }
 //Funcion para eliminar usuario
@@ -51,7 +60,10 @@ const eliminarUsuario = async (id) => {
         const result = await pool.query(`UPDATE usuarios SET estado = false WHERE id = ${id};`);
         return result;
     } catch (err) {//(Requerimiento 4)
-        console.log('Error: ', err);
+        console.log(`El error se encuentra en la tabla: ${err.table}.
+        El detalle del error es: ${err.detail}.
+        El código de error es: ${err.code}.
+        Restricción violada: ${err.constraint}`);
     }
 }
 //Funcion para registrar transferencia (Requerimiento 2)
@@ -77,11 +89,17 @@ const registrarTransferencia = async (datos) => {
             await pool.query('COMMIT');
             return true;
         } catch (err) { //(Requerimiento 4)
+            console.log(`El error se encuentra en la tabla: ${err.table}.
+            El detalle del error es: ${err.detail}.
+            El código de error es: ${err.code}.
+            Restricción violada: ${err.constraint}`);
             await pool.query('ROLLBACK');
-            throw err;
         }
     } catch (err) {//(Requerimiento 4)
-        console.log('Error: ', err);
+        console.log(`El error se encuentra en la tabla: ${err.table}.
+        El detalle del error es: ${err.detail}.
+        El código de error es: ${err.code}.
+        Restricción violada: ${err.constraint}`);
     }
 }
 //Funcion para obtener historial de transferencias
@@ -94,7 +112,10 @@ const getTransferencias = async () => {
         const result = await pool.query(consulta);
         return result;
     } catch (err) {//(Requerimiento 4)
-        console.log('Error: ', err);
+        console.log(`El error se encuentra en la tabla: ${err.table}.
+        El detalle del error es: ${err.detail}.
+        El código de error es: ${err.code}.
+        Restricción violada: ${err.constraint}`);
     }
 }
 

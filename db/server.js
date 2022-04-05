@@ -136,8 +136,17 @@ http.createServer(async (req, res) => {
             try {
                 const datos = Object.values(JSON.parse(body));
                 const result = await registrarTransferencia(datos);
-                res.statusCode = 201;//(Requerimiento 5)
-                res.end(JSON.stringify(result));
+                if (typeof result == 'string') {
+                    const objError = {
+                        error: result,
+                    }
+                    if (result == '23514') {
+                        res.end(JSON.stringify(objError));
+                    }
+                } else {
+                    res.statusCode = 201;//(Requerimiento 5)
+                    res.end(JSON.stringify(result));
+                }
             } catch (err) { //(Requerimiento 4)
                 res.statusCode = 500;//(Requerimiento 5)
                 res.end('Problema en el servidor => ', err);

@@ -70,6 +70,11 @@ $("form:last").submit(async (e) => {
             }),
         });
         const data = await response.json();
+
+        if(data.error){
+            alert('Saldo insuficiente');
+        }
+
         location.reload();
     } catch (e) {
         console.log(e);

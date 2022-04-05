@@ -94,6 +94,7 @@ const registrarTransferencia = async (datos) => {
             El código de error es: ${err.code}.
             Restricción violada: ${err.constraint}`);
             await pool.query('ROLLBACK');
+            return err.code;
         }
     } catch (err) {//(Requerimiento 4)
         console.log(`El error se encuentra en la tabla: ${err.table}.

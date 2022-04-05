@@ -88,7 +88,7 @@ const registrarTransferencia = async (datos) => {
 const getTransferencias = async () => {
     try {
         const consulta = {
-            text: 'SELECT fecha, nombre, (SELECT nombre from usuarios WHERE usuarios.id = transferencias.receptor), monto from transferencias INNER JOIN usuarios on transferencias.emisor = usuarios.id;',
+            text: 'SELECT fecha, usuarios.nombre, (SELECT nombre FROM usuarios WHERE usuarios.id = transferencias.receptor), monto FROM transferencias INNER JOIN usuarios on transferencias.emisor = usuarios.id;',
             rowMode: 'array'
         }
         const result = await pool.query(consulta);
